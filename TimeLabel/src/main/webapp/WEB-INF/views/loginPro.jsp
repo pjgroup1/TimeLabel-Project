@@ -10,10 +10,10 @@
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		Class.forName("com.mysql.jdbc.Driver");
-		String DB_URL = "jdbc:mysql://localhost:1234/TimeLabel?characterEncoding=UTF-8&serverTimezone=UTC";
-		String userName="java";
-		String password="1234";
+		Class.forName("org.gjt.mm.mysql.Driver");
+		String DB_URL = "jdbc:mysql://javalec-sat.crwq4oaekhum.ap-northeast-2.rds.amazonaws.com";
+		String userName="sang";
+		String password="sang1234";
 		
 		con = DriverManager.getConnection(DB_URL, userName, password);
 		
@@ -60,7 +60,7 @@
 %>
 			<script>
 				alert("아이디를 확인해주세요.");
-				//location.href = "loginForm.jsp";  // 서버가 요청을 받는다.
+				//location.href = "loginPro.jsp";  // 서버가 요청을 받는다
 				history.back();  // history.go(-1);  // 서버에 요청없이 브라우저에서 자체적으로 처리
 			</script>
 <%
