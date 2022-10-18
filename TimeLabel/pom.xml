@@ -13,7 +13,7 @@
 	<properties>
 	
 		<!-- 환경 설정 -->
-		<!-- 깃 사용중 -->
+		
 		<!-- 추가 -->
 		<!-- https://maven.apache.org/plugins/maven-resources-plugin/resources-mojo.html#encoding -->
 	 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
