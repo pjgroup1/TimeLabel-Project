@@ -12,6 +12,8 @@
 	
 	<properties>
 	
+		<!-- 환경 설정 -->
+		
 		<!-- 추가 -->
 		<!-- https://maven.apache.org/plugins/maven-resources-plugin/resources-mojo.html#encoding -->
 	 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -260,6 +262,14 @@
 		    <groupId>com.oracle.database.jdbc</groupId>
 		    <artifactId>ojdbc8</artifactId>
 		    <version>${oracle-version}</version>
+		</dependency>
+		
+		<!-- heiSQL jdbc driver -->
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+    		<groupId>mysql</groupId>
+    		<artifactId>mysql-connector-java</artifactId>
+    		<version>8.0.30</version>
 		</dependency>
 		
 		<!-- Hikari-CP (DBCP) -->
