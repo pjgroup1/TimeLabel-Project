@@ -71,6 +71,10 @@
 		function goLoginForm() {
 			location.href="http://localhost:8282/TimeLabel/";
 		}
+		
+		function goJoinForm() {
+			location.href="http://localhost:8282/TimeLabel/joinPro";
+		}
  
 	</script>
 </head>
@@ -83,7 +87,7 @@
  
 		<!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
 		<!-- 값(파라미터) 전송은 POST 방식, 전송할 페이지는 joinPro.jsp -->
-		<form method="post" action="../views/joinPro.jsp" name="userInfo"
+		<form method="post" action="../../joinPro.jsp" name="userInfo"
 			onsubmit="return checkValue()">
             <table>
                 <tr>
@@ -137,7 +141,7 @@
                 </tr>
             </table>
             <br>
-            <input type="submit" value=" 가 입 ">
+            <input type="submit" value=" 가 입 " onclick="goJoinForm()">
             <input type="button" value=" 취 소 " onclick="goLoginForm()">
         </form>
     </div>
