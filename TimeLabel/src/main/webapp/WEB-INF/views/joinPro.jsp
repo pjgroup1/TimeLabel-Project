@@ -6,7 +6,7 @@
 	request.setCharacterEncoding("UTF-8"); 
 	
 %>
- 
+
 <%
 	//join.jsp에서 입력받은 값들을 받아옴
 	String ID = request.getParameter("ID");
@@ -15,19 +15,22 @@
 	String Email = request.getParameter("Email");
 	String Contact = request.getParameter("Contact");
 	String Address = request.getParameter("Address");
- 
+
 	try {
+		 Class.forName("org.mariadb.jdbc.Driver");		// HeidiSQL jdbc 연결
+		 String DB_URL = "jdbc:mysql://javalec-sat.crwq4oaekhum.ap-northeast-2.rds.amazonaws.com";
 		
-		Class.forName("com.mysql.jdbc.Driver");
-		String DB_URL = "jdbc:mysql://localhost:1234/TimeLabel?characterEncoding=UTF-8&serverTimezone=UTC";
+		//String DB_URL = "jdbc:mysql://localhost:1234/TimeLabel?characterEncoding=UTF-8&serverTimezone=UTC";
 		
 		//기본: "jdbc:mysql://localhost:1234/TimeLabel"
 		//"jdbc:mysql://localhost:1234/TimeLabel?user=user&password=password&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 		//?characterEncoding=UTF-8&serverTimezone=UTC
 		//?useUnicode=true&characterEncoding=utf8
 		
-		String userName="java";
-		String password="1234";
+		 String userName="sang";
+		 String password="sang1234";
+		
+		
 		
 		Connection con = DriverManager.getConnection(DB_URL, userName, password);
 		String sql = "INSERT INTO login_db(ID, PWD, UserName, Email, Contact, Address) VALUES (?,?,?,?,?,?)"; // sql문 작성(입력받은 값들을 보내기 위한 작업)
@@ -58,5 +61,5 @@
 
 <script>
 	alert("저희 쇼핑몰과 함께 해주셔서 감사합니다!");
-	location.href='../views/UserMain.jsp'; 
+	location.href="http://localhost:8282/TimeLabel/UserMain"; 
 </script>

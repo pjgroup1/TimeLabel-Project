@@ -16,7 +16,7 @@
 	
 	<script>
 		alert("로그인 페이지로 이동합니다.");
-		location.href="login";
+		location.href="http://localhost:8282/TimeLabel/";
 	</script>
 	
 </body>
