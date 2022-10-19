@@ -7,7 +7,7 @@
 %>
 	<script>
 		alert("로그아웃 되었습니다.");
-		location.href = "../../UserMain.jsp";
+		location.href = "http://localhost:8282/TimeLabel/UserMain";
 	</script>
 </body>
 </html>
