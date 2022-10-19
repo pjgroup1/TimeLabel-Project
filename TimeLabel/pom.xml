@@ -483,6 +483,12 @@
     <build>
     
         <plugins>
+        <!-- 10/18 5:42 추가-->
+       		<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.2</version>
+			</plugin>
         
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
