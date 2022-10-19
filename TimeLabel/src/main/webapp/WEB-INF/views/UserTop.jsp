@@ -33,17 +33,17 @@
         String id = (String) session.getAttribute("ID");
         if(id == null) {
 %>
-            <li><a href="../../join.jsp">회원가입</a></li>
-            <li><a href="../../login.jsp">로그인</a></li>
-            <li><a href="../../CartView.jsp">장바구니</a></li>
+            <li><a href="../../join">회원가입</a></li>
+            <li><a href="../../login">로그인</a></li>
+            <li><a href="../../CartView">장바구니</a></li>
 <%          
             }
 		
         // 현재 로그인된 아이디가 있다면 (= session에 저장된 id가 있다면)
         else {
 %>
-            <li><a href="../../logoutPro.jsp">로그아웃</a></li>
-            <li><a href="../../CartView.jsp">장바구니</a></li>
+            <li><a href="../../logoutPro">로그아웃</a></li>
+            <li><a href="../../CartView">장바구니</a></li>
             <li><a href="">마이페이지</a></li>
 <%			
         }
