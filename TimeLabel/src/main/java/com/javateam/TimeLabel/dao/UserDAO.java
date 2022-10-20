@@ -13,7 +13,7 @@ public class UserDAO {
 public UserDAO() { //try catch 문을 통해 예외 처리 
 	try { 
 		// String DB_URL = "jdbc:mysql://localhost:1234/TimeLabel?characterEncoding=UTF-8&serverTimezone=UTC"; 
-		String DB_URL = "jdbc:mysql:javalec-sat.crwq4oaekhum.ap-northeast-2.rds.amazonaws.com";
+		String DB_URL ="jdbc:mariadb://javalec-sat.crwq4oaekhum.ap-northeast-2.rds.amazonaws.com:3306/sang_db";
 		String userName = "sang"; 
 		String password = "sang1234"; 
 		Class.forName("org.gjt.mm.mysql.Driver"); 
@@ -24,7 +24,7 @@ public UserDAO() { //try catch 문을 통해 예외 처리
 		} 
 	}
 	public int LoginCheck(String ID, String PWD) {
-		String sql = "SELECT PWD FROM login_db WHERE ID=?"; 
+		String sql =  "SELECT USER_PW FROM USER WHERE USER_ID=?"; 
 		try { 
 			pstmt = conn.prepareStatement(sql); 
 			pstmt.setString(1, ID); // sql 문에서 ?에 해당하는 값에 userID를 집어넣음 첫번째 물음표일 경우 1 두번째 물음표이면 2이런식으로 

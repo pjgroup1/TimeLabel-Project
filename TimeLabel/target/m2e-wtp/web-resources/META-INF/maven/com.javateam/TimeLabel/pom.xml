@@ -68,6 +68,13 @@
 	
 	<dependencies>
 	
+	<!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+      <dependency>
+         <groupId>org.mariadb.jdbc</groupId>
+         <artifactId>mariadb-java-client</artifactId>
+         <version>3.0.8</version>
+      </dependency>
+      
 		<!-- spring-context -->
 		<dependency>
 			<groupId>org.springframework</groupId>
