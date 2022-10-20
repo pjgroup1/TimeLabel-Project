@@ -12,10 +12,11 @@ public class UserDAO {
  
 public UserDAO() { //try catch 문을 통해 예외 처리 
 	try { 
-		String DB_URL = "jdbc:mysql://localhost:1234/TimeLabel?characterEncoding=UTF-8&serverTimezone=UTC"; 
-		String userName = "java"; 
-		String password = "1234"; 
-		Class.forName("com.mysql.jdbc.Driver"); 
+		// String DB_URL = "jdbc:mysql://localhost:1234/TimeLabel?characterEncoding=UTF-8&serverTimezone=UTC"; 
+		String DB_URL = "jdbc:mysql:javalec-sat.crwq4oaekhum.ap-northeast-2.rds.amazonaws.com";
+		String userName = "sang"; 
+		String password = "sang1234"; 
+		Class.forName("org.gjt.mm.mysql.Driver"); 
 		conn = DriverManager.getConnection(DB_URL,userName,password); 
 		} 
 	catch(Exception e) { 

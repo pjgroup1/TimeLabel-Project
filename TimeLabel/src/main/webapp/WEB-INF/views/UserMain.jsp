@@ -17,13 +17,13 @@ String[] price = {"9,500", "9,500", "9,700"};
 function fnCart(name, price) {
 	//alert("Name : " + name + "\nPrice : " + price);
 	if(confirm("장바구니에 담으시겠습니까?")) {
-		location.href = "../../CartPro.jsp?name=" + name + "&price=" + price;
+		location.href = "http://localhost:8282/TimeLabel/CartPro?name=" + name + "&price=" + price;
 	}
 }
 
 function fnView() {
 	if(confirm("장바구니를 보시겠습니까?")){
-		location.href = "../../CartView.jsp";
+		location.href = "http://localhost:8282/TimeLabel/CartView";
 	}
 }
 </script>

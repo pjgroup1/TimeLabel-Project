@@ -38,4 +38,39 @@ public class HomeController {
 		return "join";
 	}
 	
+	@GetMapping("/joinPro")
+	public String joinPro() {
+		logger.info("회원가입 폼");
+		
+		return "joinPro";
+	}
+	
+	@GetMapping("/UserMain")
+	public String UserMain() {
+		logger.info("사용자 메인화면");
+		
+		return "UserMain";
+	}
+	
+	@GetMapping("/UserTop")
+	public String UserTop() {
+		logger.info("상단바");
+		
+		return "UserTop";
+	}
+	
+	@GetMapping("/CartView")
+	public String CartView() {
+		logger.info("장바구니");
+		
+		return "CartView";
+	}
+	
+	@GetMapping("/logout")
+	public String logout() {
+		logger.info("로그아웃");
+		
+		return "logout";
+	}
+	
 }
