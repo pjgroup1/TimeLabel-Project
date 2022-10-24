@@ -1,4 +1,4 @@
-package com.javateam.TimeLabel.controller;
+package com.javateam.TimeLabel.domain;
  
 public class User {
 	public String UserType;
