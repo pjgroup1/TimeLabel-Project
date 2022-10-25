@@ -2,7 +2,7 @@ package com.javateam.TimeLabel.repositoryImpl;
 
 import com.javateam.TimeLabel.dto.Product;
 
-public interface ProductRepositoryImpl {
+public interface ProductRepository{
 	
 	// 상품 등록
 	Product registration(Product product);

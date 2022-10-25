@@ -1,7 +1,7 @@
 package com.javateam.TimeLabel.dto;
 
 import java.sql.Date;
-import java.util.concurrent.atomic.AtomicLong;
+
 
 import lombok.Data;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import lombok.ToString;
 // 회원 DTO
 public class User {
 	// 회원 번호 (자동 증가)
-	private AtomicLong user_no;
+	private long user_no;
 	// 회원 아이디
 	private String user_id;
 	// 회원 이름

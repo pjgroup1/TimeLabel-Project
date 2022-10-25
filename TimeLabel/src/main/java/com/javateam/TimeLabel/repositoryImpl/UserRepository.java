@@ -4,17 +4,24 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
+import java.util.Optional;
 
+import com.javateam.TimeLabel.dto.Product;
 import com.javateam.TimeLabel.dto.User;
+import com.javateam.TimeLabel.service.UserSearch;
  
-public interface UserRepositoryImpl {
+public interface UserRepository{
 	
 	// 회원 가입
 	User join(User user);
 	// 회원 조회
-	User findById(String user_id);
+	Optional<User> findById(Long user_no);
+	// 회원 전체 조회
+	List<User> findAll(UserSearch userSearch);
 	// 회원 수정
-	void update(String user_id, String user_pw, String user_mobile, String address, String address_detail);
+	void update(Long user_no, User updateParam);
 	// 회원 삭제
 	void delete(String user_id);
+	
 }
