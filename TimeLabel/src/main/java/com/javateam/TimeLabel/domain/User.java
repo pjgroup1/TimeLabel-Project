@@ -1,55 +1,111 @@
 package com.javateam.TimeLabel.domain;
- 
+
+import org.springframework.stereotype.Component;
+
+import java.util.Date;
+
 public class User {
-	public String UserType;
-	public String ID;
-	public String PW;
-	public String UserName;
-	public String Email;
-	public String Contact;
-	public String Address;
-	
-	public String getUserType() {
-		return UserType;
+	private int no;
+	private String id;
+	private String name;
+	private String pw;
+	private Date date;
+	private String email;
+	private String birth;
+	private String mobile;
+	private String address;
+	private String detailAddress;
+
+	public User() {}
+	public User(String id, String name, String pw, Date date, String email, String birth, String mobile, String address, String detailAddress) {
+		this.id = id;
+		this.name = name;
+		this.pw = pw;
+		this.date = date;
+		this.email = email;
+		this.birth = birth;
+		this.mobile = mobile;
+		this.address = address;
+		this.detailAddress = detailAddress;
 	}
-	public void setUserType(String userType) {
-		UserType = userType;
+
+	public int getNo() {
+		return no;
 	}
-	public String getID() {
-		return ID;
+
+	public void setNo(int no) {
+		this.no = no;
 	}
-	public void setID(String iD) {
-		ID = iD;
+
+	public String getId() {
+		return id;
 	}
-	public String getPW() {
-		return PW;
+
+	public void setId(String id) {
+		this.id = id;
 	}
-	public void setPW(String pW) {
-		PW = pW;
+
+	public String getName() {
+		return name;
 	}
-	public String getUserName() {
-		return UserName;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	public void setUserName(String userName) {
-		UserName = userName;
+
+	public String getPw() {
+		return pw;
 	}
+
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 	public String getEmail() {
-		return Email;
+		return email;
 	}
+
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
-	public String getContact() {
-		return Contact;
+
+	public String getBirth() {
+		return birth;
 	}
-	public void setContact(String contact) {
-		Contact = contact;
+
+	public void setBirth(String birth) {
+		this.birth = birth;
 	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
 	public String getAddress() {
-		return Address;
+		return address;
 	}
+
 	public void setAddress(String address) {
-		Address = address;
+		this.address = address;
 	}
-	
+
+	public String getDetailAddress() {
+		return detailAddress;
+	}
+
+	public void setDetailAddress(String detailAddress) {
+		this.detailAddress = detailAddress;
+	}
 }
