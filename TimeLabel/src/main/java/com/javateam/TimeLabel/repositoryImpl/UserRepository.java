@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.javateam.TimeLabel.dto.Product;
@@ -22,6 +23,7 @@ public interface UserRepository{
 	// 회원 수정
 	void update(Long user_no, User updateParam);
 	// 회원 삭제
-	void delete(String user_id);
+	void delete(Long user_no);
+	
 	
 }

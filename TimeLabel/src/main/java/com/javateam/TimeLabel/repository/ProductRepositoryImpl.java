@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import com.javateam.TimeLabel.dto.Product;
@@ -22,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.sf.log4jdbc.sql.resultsetcollector.JdbcUtils;
 
 @Slf4j
+@Repository
 public class ProductRepositoryImpl implements ProductRepository {
 
 	private final JdbcTemplate template;
@@ -102,6 +104,12 @@ public class ProductRepositoryImpl implements ProductRepository {
 	 */
 
 	/*boolean andFlag = false;
+	 * 
+	  // 동적 쿼리
+		if(StringUtils.hasText(user_id) || user_name != null) {
+			sql += " where";
+		}
+	
 	List<Object> param = new ArrayList<>();
 	if(StringUtils.hasText(user_id)) {
 		// ?안에 값이 들어간 것에  포함된 모든 문자열을 검색후 문자열을 합쳐줌

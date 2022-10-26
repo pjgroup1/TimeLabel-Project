@@ -48,7 +48,7 @@
         
         // 회원가입 버튼 클릭시 회원가입 화면으로 이동
 		function goJoinForm() {
-			location.href="http://localhost:8282/TimeLabel/join.do";
+			location.href="http://localhost:8888/join.do";
 		}	
 		
 /* 		function goAdminLoginPro() {
@@ -64,7 +64,7 @@
     <div id="wrap">
     	<center><b><font size="6" color="gray">저희 "타임라벨"에 오신 걸 환영합니다!</font></b></center>
         <br><br><br>
-        <form name="loginInfo" method="post" onsubmit="return checkValue()" action="../../loginPro.jsp">
+        <form name="loginInfo" method="post" onsubmit="return checkValue()" action="login.do">
        		
        		<!-- 이미지 추가 -->
 			<center><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxvbb28oyIcTfCHqnSegWvHOU9s7CY_cEozA&usqp=CAU" width="40%", height="20%"></center>

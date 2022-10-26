@@ -3,6 +3,7 @@ package com.javateam.TimeLabel.repository;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -10,12 +11,19 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import com.javateam.TimeLabel.dto.Product;
@@ -44,15 +52,21 @@ afterPropertiesSet(); }
  @param dataSource*/
 
 @Slf4j
+@Repository
 public class UserRepositoryImpl implements UserRepository{
 	
 	// spring에서 제공해주는 Jdbctemplate를 사용해서 반복되고 많은 코드량 줄일수 있음
-	private final JdbcTemplate template;
+	// 그냥 JdbcTemplate 사용시 쿼리문가 값을 같은 순서로 넣어야하는데 NamedParameter은 그런 번거러움에서 벗어날수 있음
+	private final NamedParameterJdbcTemplate template;
+	private final SimpleJdbcInsert jdbcInsert;
 	
 	 
 	@Autowired
 	public UserRepositoryImpl(DataSource dataSource) {
-		this.template = new JdbcTemplate(dataSource);
+		this.template = new NamedParameterJdbcTemplate(dataSource);
+		this.jdbcInsert = new SimpleJdbcInsert(dataSource)
+				.withTableName("user")
+				.usingGeneratedKeyColumns("user_no");
 	}
 	
 	// 회원 가입
@@ -61,43 +75,55 @@ public class UserRepositoryImpl implements UserRepository{
 		// 회원 가입 sql문
 		// user_no 는 pk라 비워둬야함 데이터베이스가 직접 생성해줄 것임
 		String sql = "insert into User(user_id, user_name, user_pw, user_mobile, user_email, user_birth, address, address_detail)"
-				+ "values(?,?,?,?,?,?,?,?)";
+				+ "values(:user_id,:user_name,:user_pw,:user_mobile,:user_email,:user_birth,:address,:address_detail)";
+		
+		// user의  파라미터를 만듬
+		SqlParameterSource param = new BeanPropertySqlParameterSource(user);
+		// BeanPropertySqlParameterSource 자바빈 프로퍼티 규약을 통해 자동으로 파라미터 객체를 생성
+		// ex) getXxx() -> xxx, getUser_name -> user_name
+		// key = user_name / value = 유저 이름 값
+		
 		// 자동 증가값 no를 가져오기 위해 사용
 		KeyHolder keyHolder = new GeneratedKeyHolder();
+		
 		// KeyHolder 와 connection.prepareStatement(sql, new String[]{"user_no"}) 를 사용해서 지정해주면
 		// insert 쿼리 실행 이후에 데이터베이스에 생성된 no 값을 조회할 수 있다.
+		template.update(sql, param, keyHolder);
 		
-		template.update(connection ->{
-			// update(String sql, @Nullable Object... args) - 생성.업데이트.삭제 모두 update
-			// 자동 증가 키
-			PreparedStatement ps = connection.prepareStatement(sql, new String[]{"user_no"});
-			ps.setString(1, user.getUser_id());
-			ps.setString(2, user.getUser_name());
-			ps.setString(3, user.getUser_pw());
-			ps.setString(4, user.getUser_mobile());
-			ps.setString(5, user.getUser_email());
-			ps.setDate(6, user.getUser_birth());
-			ps.setString(7, user.getAddress());
-			ps.setString(8, user.getAddress_detail());
-			return ps;
-		}, keyHolder);
 		// 키값을 꺼낼수 있게됨
 		long key = keyHolder.getKey().longValue();
+		
 		// 키 값을 넣어줌
 		user.setUser_no(key);
 		return user;
 	}
 	
+	// 회원 수정
+		@Override
+		public void update(Long user_no, User updateParam) {
+			// 회원 수정  sql문
+			String sql = "update user set user_pw=:user_pw, user_mobile=:user_mobile,"
+					+ " address=:address, address_detail=:address_detail where user_no=:user_no";
+			SqlParameterSource param = new MapSqlParameterSource()
+					.addValue("user_pw", updateParam.getUser_pw())
+					.addValue("user_mobile", updateParam.getUser_mobile())
+					.addValue("address", updateParam.getAddress())
+					.addValue("address_detail", updateParam.getAddress_detail());
+			// 위의 sql과 순서가 틀리지 않게 주의
+			template.update(sql, param);
+		}
+	
 	// 회원 조회
 	@Override
 	public Optional<User> findById(Long user_no) {
 		// 회원 조회 sql문
-		String sql = "select user_id, user_name, user_mobile, address, address_detail from user where user_no=?";
+		String sql = "select user_id, user_name, user_mobile, address, address_detail from user where user_no=:user_no";
 		// queryForObject(String sql, RowMapper<T> rowMapper, @Nullable Object... args) 
 		
 		try{
+			Map<String, Object> param = Map.of("user_no", user_no);
 			// .queryForObject 하나의 값만 찾을때 사용함 하나 이상일때 .query 사용 (밑에도 query 사용 가능함)
-			User user = template.queryForObject(sql, userRowMapper(), user_no);
+			User user = template.queryForObject(sql, param ,userRowMapper());
 			return Optional.of(user);
 		}catch(EmptyResultDataAccessException e){
 			// 데이터가 안들어 왔을시
@@ -117,41 +143,25 @@ public class UserRepositoryImpl implements UserRepository{
 		String address = userSearch.getAddress();
 		String address_detatil = userSearch.getAddress_detail();
 		
-				
-		String sql = "select user_id, user_name, user_mobile, user_email, , address, address_detatil from user";		
-		// 동적 쿼리
-		if(StringUtils.hasText(user_id) || user_name != null) {
-			sql += " where";
-		}
-		
+		SqlParameterSource param = new BeanPropertySqlParameterSource(userSearch);	
+		String sql = "select user_id, user_name, user_mobile, user_email, , address, address_detatil from user";			
 		
 		/**
 		 * query 인터페이스
 		 * <T> List<T> query(String sql, RowMapper<T> rowMapper, Obeject....args) throws DataAccessException
 		 */
-		return template.query(sql, userRowMapper());
+		return template.query(sql, param, userRowMapper());
 	}
 	
-	// 회원 수정
-	@Override
-	public void update(Long user_no, User updateParam) {
-		// 회원 수정  sql문
-		String sql = "update user set user_pw=?, user_mobile=?, address=?, address_detail=? where user_no=?";
-		// 위의 sql과 순서가 틀리지 않게 주의
-		template.update(sql, 
-				updateParam.getUser_pw(),
-				updateParam.getUser_mobile(),
-				updateParam.getAddress(),
-				updateParam.getAddress_detail(),
-				user_no);
-	}
+	
 	
 	// 회원 삭제
 	@Override
-	public void delete(String user_id) {
+	public void delete(Long user_no) {
 		// 회원 삭제 sql문
-		String sql ="delete from user where user_id=?";
-		template.update(sql, user_id);
+		String sql ="delete from user where user_no=:user_no";
+		SqlParameterSource param = new BeanPropertySqlParameterSource(user_no);	
+		template.update(sql, param);
 		
 	}
 	
@@ -162,19 +172,12 @@ public class UserRepositoryImpl implements UserRepository{
 	 * 결과가 없으면 컬렉션을 반환한다.
 	 */
 	private RowMapper<User> userRowMapper(){
-        return (rs, rowNum) -> {
-            User user = new User();
-            user.setUser_id(rs.getString("user_id"));
-            user.setUser_name(rs.getString("user_name"));
-            user.setUser_pw(rs.getString("user_pw"));
-            user.setUser_email(rs.getString("user_email"));
-            user.setUser_mobile(rs.getString("user_mobile"));
-            user.setUser_birth(rs.getDate("user_birth"));
-            user.setAddress(rs.getString("address"));
-            user.setAddress_detail(rs.getString("address_detail"));
-            user.setUser_date(rs.getDate("user_date"));
-            return user;
-        };
+		// Result set을 사용해서 User 객체를 다넣어줌
+		// BeanPropertyRowMapper 는 언더스코어 표기법을 카멜로 자동 변환해준다.
+		// 따라서 setUser_name 으로 조회해도 setUserName() 으로 들어가짐
+      return BeanPropertyRowMapper.newInstance(User.class);
     }
+
+	
 
 }

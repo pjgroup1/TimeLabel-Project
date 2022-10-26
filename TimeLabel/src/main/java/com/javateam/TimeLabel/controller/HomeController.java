@@ -4,73 +4,69 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.javateam.TimeLabel.dto.User;
+import com.javateam.TimeLabel.repository.UserRepositoryImpl;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
 @RequestMapping("/")
+@Slf4j
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@GetMapping("/")
+	private UserRepositoryImpl userRepositoryImpl;
+	// @GetMapping("/")
 	public String home() {
-		logger.info("환영합니다");
-		
-		return "login";
+		return "home";
 	}
 	
-	@GetMapping("/join.do")
-	public String join() {
-		logger.info("회원가입");
+	@GetMapping("/")
+	public String homeLogin(@CookieValue(name="user_no", required = false) Long user_id, Model model) {
 		
-		return "join";
+		if(user_id == null) {
+			return "home";
+		}
+		
+		// 로그인
+		User loginUser = userRepositoryImpl.findById(user_no);
+		if(loginUser == null) {
+			// 값이 없을시
+			return "home";
+		}
+		model.addAttribute("user", loginUser);
+		
+		// 로그인 페이지로 이동
+		return "loginHome";
 	}
 	
-	@GetMapping("/joinPro")
-	public String joinPro() {
-		logger.info("회원가입 폼");
+	// 로그아웃
+	@PostMapping("/logout")
+	public String logout(HttpServletResponse response) {
+		expireCookie(response, "user_id");
 		
-		return "joinPro";
+		// 로그아웃시 홈화면으로 이동
+		return "redirect:/";
 	}
 	
-	@GetMapping("/UserMain")
-	public String UserMain() {
-		logger.info("사용자 메인화면");
-		
-		return "UserMain";
+	private void expireCookie(HttpServletResponse response, String cookieName) {
+		Cookie cookie = new Cookie(cookieName, null);
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
 	}
-	
-	@GetMapping("/UserTop")
-	public String UserTop() {
-		logger.info("상단바");
-		
-		return "UserTop";
-	}
-	
-	@GetMapping("/CartView")
-	public String CartView() {
-		logger.info("장바구니");
-		
-		return "CartView";
-	}
-	
-	@GetMapping("/logout")
-	public String logout() {
-		logger.info("로그아웃");
-		
-		return "logout";
-	}
-	
 }
