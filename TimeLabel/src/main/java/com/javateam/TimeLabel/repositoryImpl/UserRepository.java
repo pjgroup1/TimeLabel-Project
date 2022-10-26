@@ -11,7 +11,8 @@ import java.util.Optional;
 import com.javateam.TimeLabel.dto.Product;
 import com.javateam.TimeLabel.dto.User;
 import com.javateam.TimeLabel.service.UserSearch;
- 
+
+
 public interface UserRepository{
 	
 	// 회원 가입

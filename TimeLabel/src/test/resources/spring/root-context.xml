@@ -17,11 +17,15 @@
 
 	<!-- AOP ready -->
 	<aop:aspectj-autoproxy />
+
+	
 	
 	<!-- HikariDataSource -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-		<property name="driverClassName" value="org.mariadb.jdbc.Driver"></property>
-		<property name="jdbcUrl" value="jdbc:mariadb://javalec-sat.crwq4oaekhum.ap-northeast-2.rds.amazonaws.com:3306/sang_db"></property>
+		<property name="driverClassName"
+			value="org.mariadb.jdbc.Driver"></property>
+		<property name="jdbcUrl"
+			value="jdbc:mariadb://javalec-sat.crwq4oaekhum.ap-northeast-2.rds.amazonaws.com:3306/sang_db"></property>
 		<property name="username" value="sang"></property>
 		<property name="password" value="sang1234"></property>
 	</bean>

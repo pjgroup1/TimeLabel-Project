@@ -25,18 +25,23 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Handles requests for the application home page.
  */
+@Slf4j
 @Controller
 @RequestMapping("/")
-@Slf4j
 public class HomeController {
 	
 	private UserRepositoryImpl userRepositoryImpl;
-	// @GetMapping("/")
-	public String home() {
-		return "home";
-	}
 	
 	@GetMapping("/")
+	public String home() {
+		return "login";
+	}
+	@GetMapping("/join.do")
+	public String joina() {
+		return "join";
+	}
+	
+	// @GetMapping("/")
 	public String homeLogin(@CookieValue(name="user_no", required = false) Long user_id, Model model) {
 		
 		if(user_id == null) {

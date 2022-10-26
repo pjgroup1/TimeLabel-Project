@@ -48,7 +48,7 @@
         
         // 회원가입 버튼 클릭시 회원가입 화면으로 이동
 		function goJoinForm() {
-			location.href="http://localhost:8888/join.do";
+			location.href="http://localhost:8888/TimeLabel/join.do";
 		}	
 		
 /* 		function goAdminLoginPro() {

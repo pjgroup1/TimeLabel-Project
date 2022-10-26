@@ -58,6 +58,7 @@ public class UserRepositoryImpl implements UserRepository{
 	// spring에서 제공해주는 Jdbctemplate를 사용해서 반복되고 많은 코드량 줄일수 있음
 	// 그냥 JdbcTemplate 사용시 쿼리문가 값을 같은 순서로 넣어야하는데 NamedParameter은 그런 번거러움에서 벗어날수 있음
 	private final NamedParameterJdbcTemplate template;
+	// insert에서만 사용 다른 코드들은 큰관계없음
 	private final SimpleJdbcInsert jdbcInsert;
 	
 	 
@@ -65,36 +66,17 @@ public class UserRepositoryImpl implements UserRepository{
 	public UserRepositoryImpl(DataSource dataSource) {
 		this.template = new NamedParameterJdbcTemplate(dataSource);
 		this.jdbcInsert = new SimpleJdbcInsert(dataSource)
-				.withTableName("user")
-				.usingGeneratedKeyColumns("user_no");
+				.withTableName("user") // 데이터를 저장할 테이블명 지정
+				.usingGeneratedKeyColumns("user_no"); // key를 생성하는 PK컬럼 명을 지정
+				// .usingColumns(columnNames); 생략가능~
 	}
 	
 	// 회원 가입
 	@Override
 	public User join(User user) {
-		// 회원 가입 sql문
-		// user_no 는 pk라 비워둬야함 데이터베이스가 직접 생성해줄 것임
-		String sql = "insert into User(user_id, user_name, user_pw, user_mobile, user_email, user_birth, address, address_detail)"
-				+ "values(:user_id,:user_name,:user_pw,:user_mobile,:user_email,:user_birth,:address,:address_detail)";
-		
-		// user의  파라미터를 만듬
 		SqlParameterSource param = new BeanPropertySqlParameterSource(user);
-		// BeanPropertySqlParameterSource 자바빈 프로퍼티 규약을 통해 자동으로 파라미터 객체를 생성
-		// ex) getXxx() -> xxx, getUser_name -> user_name
-		// key = user_name / value = 유저 이름 값
-		
-		// 자동 증가값 no를 가져오기 위해 사용
-		KeyHolder keyHolder = new GeneratedKeyHolder();
-		
-		// KeyHolder 와 connection.prepareStatement(sql, new String[]{"user_no"}) 를 사용해서 지정해주면
-		// insert 쿼리 실행 이후에 데이터베이스에 생성된 no 값을 조회할 수 있다.
-		template.update(sql, param, keyHolder);
-		
-		// 키값을 꺼낼수 있게됨
-		long key = keyHolder.getKey().longValue();
-		
-		// 키 값을 넣어줌
-		user.setUser_no(key);
+		Number key = jdbcInsert.executeAndReturnKey(param);
+		user.setUser_no(key.longValue());
 		return user;
 	}
 	
@@ -126,7 +108,7 @@ public class UserRepositoryImpl implements UserRepository{
 			User user = template.queryForObject(sql, param ,userRowMapper());
 			return Optional.of(user);
 		}catch(EmptyResultDataAccessException e){
-			// 데이터가 안들어 왔을시
+			// 데이터가 안들어 왔을시 
 			return Optional.empty();
 		}
 			
@@ -159,7 +141,7 @@ public class UserRepositoryImpl implements UserRepository{
 	@Override
 	public void delete(Long user_no) {
 		// 회원 삭제 sql문
-		String sql ="delete from user where user_no=:user_no";
+		String sql ="delete from user where user_no=?";
 		SqlParameterSource param = new BeanPropertySqlParameterSource(user_no);	
 		template.update(sql, param);
 		

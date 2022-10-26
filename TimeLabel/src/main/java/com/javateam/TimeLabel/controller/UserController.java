@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 	
 	
-	@GetMapping("/loginm")
+	// 로그인 화면
+	@GetMapping("/login")
 	public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
 		return "login/loginForm";
 	}
 	
+	// 로그인
 	@PostMapping
 	public String loginAction(@Valid @ModelAttribute 
 			LoginForm form, BindingResult bindingResult,
@@ -41,6 +43,7 @@ public class UserController {
 		
 		// 로그인 성공 처리
 		
+		// 쿠키에 시간 정보를 주지 않으면 세션 쿠키(브라우저 종료시 모두 종료)
 		Cookie idCookie = new Cookie("user_id", String.valueOf(loginUser.getId()));
 		response.addCookie(idCookie);
 		
