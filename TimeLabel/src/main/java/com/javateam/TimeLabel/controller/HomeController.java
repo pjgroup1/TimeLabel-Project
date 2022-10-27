@@ -88,11 +88,11 @@ public class HomeController {
 		return "CartView";
 	}
 
-	@GetMapping("/logout")
+	@GetMapping("/logoutPro")
 	public String logout() {
 		logger.info("로그아웃");
 
-		return "logout";
+		return "logoutPro";
 	}
 
 }
