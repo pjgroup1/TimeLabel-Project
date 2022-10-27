@@ -26,7 +26,7 @@ try {
 	String user = "User";
 
 	//id에 해당하는 passwd 가져오기
-	String sql = "SELECT USER_PW, User_NO FROM USER WHERE USER_ID=?";
+	String sql = "SELECT USER_PW, USER_INDEX FROM USER WHERE USER_ID=?";
 	pstmt = con.prepareStatement(sql);
 	pstmt.setString(1, id);
 
@@ -41,7 +41,7 @@ try {
 		if (pw.equals(rs.getString("USER_PW"))) {
 	session.setAttribute("ID", id);
 
-	if (Integer.parseInt(rs.getString("USER_NO")) <= 2) { //user number 1,2는 관리자
+	if (Integer.parseInt(rs.getString("USER_INDEX")) <= 2) { //user number 1,2는 관리자
 		response.sendRedirect("/AdminMain");
 
 	} else { //일반 고객
