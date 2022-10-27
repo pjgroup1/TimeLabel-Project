@@ -46,7 +46,7 @@ function fnView() {
 				out.println("<table>");
 					out.println("<tr align='center'>");
 						out.println("<td>");
-							out.println("<img src = 'img/" + img[i] + "' width='150' height='150' />");
+							out.println("<img src = 'resources/img/" + img[i] + "' width='150' height='150' />");
 						out.println("</td>");
 					out.println("</tr>");
 					
