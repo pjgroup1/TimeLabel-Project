@@ -25,6 +25,7 @@
 	<%
 	if (userId == "") {
 	%>
+	
 	<span>아이디를 입력하세요</span>
 	<input type="button" value="다시 시도" onclick="retry();">
 	<%
@@ -33,7 +34,7 @@
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+	
 		Class.forName("org.mariadb.jdbc.Driver");
 		String DB_URL = "jdbc:mariadb://javalec-sat.crwq4oaekhum.ap-northeast-2.rds.amazonaws.com:3306/sang_db";
 		String userName = "sang";
@@ -44,7 +45,7 @@
 		// 로그인 화면에 입력된 아이디와 비밀번호를 가져온다
 
 		//id에 해당하는 passwd 가져오기
-		String sql = "SELECT USER_NO FROM USER WHERE USER_ID=?";
+		String sql = "SELECT USER_INDEX FROM USER WHERE USER_ID=?";
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, userId);
 	%>

@@ -33,7 +33,7 @@
 		
 		
 		Connection con = DriverManager.getConnection(DB_URL, userName, password);
-		String sql = "INSERT INTO USER(USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_MOBILE, ADDRESS) VALUES (?,?,?,?,?,?)"; // sql문 작성(입력받은 값들을 보내기 위한 작업)
+		String sql = "INSERT INTO USER(USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_MOBILE, USER_ADDRESS) VALUES (?,?,?,?,?,?)"; // sql문 작성(입력받은 값들을 보내기 위한 작업)
  
 		PreparedStatement pstmt = con.prepareStatement(sql);
  
