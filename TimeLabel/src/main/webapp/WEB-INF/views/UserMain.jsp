@@ -3,7 +3,7 @@
    
 <%@include file="UserTop.jsp" %>
 <%
-String[] img ={"sportswear.png", "neckshirt.png", "windbreaker.png"};
+String[] img ={"sportswear.jpg", "neckshirt.jpg", "windbreaker.jpg"};
 String[] name = {"스포츠웨어 상의", "넥라인 티셔츠", "바람막이"};
 String[] price = {"9,500", "9,500", "9,700"};
 %>
