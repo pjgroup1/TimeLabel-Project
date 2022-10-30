@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+PUBLIC "//mybatis.org//DTD config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+		<environments default="develpoment">
+			<environment id="development">
+				<transactionManager type="JDBC" />
+				<dataSource type="POOLED">
+					<property name="driverClassName"
+						value="org.mariadb.jdbc.Driver"></property>
+					<property name="jdbcUrl" value="jdbc:mariadb://javalec-sat.crwq4oaekhum.ap-northeast-2.rds.amazonaws.com:3306/sang_db"></property>
+					<property name="username" value="sang"></property>
+					<property name="password" value="sang1234"></property>
+				</dataSource>
+			</environment>
+		</environments>
+		<mappers>
+			<mapper resource="com/javateam/TimeLabel/Mybatis.xml" />
+		</mappers>
+	</configuration>
