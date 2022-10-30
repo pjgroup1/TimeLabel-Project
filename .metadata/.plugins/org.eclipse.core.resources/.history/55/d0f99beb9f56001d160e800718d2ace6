@@ -1,0 +1,42 @@
+package com.java.team.mapper;
+
+
+import static org.junit.Assert.assertThat;
+
+import org.assertj.core.api.AssertionErrorCollector;
+import org.assertj.core.api.Assertions;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+
+import com.java.team.dao.product.ProductDAO;
+import com.java.team.dto.Product;
+
+
+@WebAppConfiguration
+public class ProductMapperTest {
+	
+	/*@Autowired
+	private ProductDAO productDAO;
+	// ProductMapper.java 에 인터페이스 의존성 주입
+	
+	
+	// 상품 추가 테스트
+	@Test
+	public void ProductSave() {
+		Product product = new Product("ItemTest1","ItemTest1", 0, "ItemTest1", 0, "ItemTest1", "ItemTest1", "ItemTest1", "ItemTest1");
+		
+        //when
+		
+		Product savedItem = productDAO.save(product);
+
+        //then
+		
+		Product findItem = productDAO.findByIndex(product.getIndex()).get();
+		Assertions.assertThat(findItem).isEqualTo(savedItem);
+	}
+	*/
+}

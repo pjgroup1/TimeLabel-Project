@@ -1,0 +1,5 @@
+package com.java.team.dao.product;
+
+public class ProductSearchCond {
+
+}

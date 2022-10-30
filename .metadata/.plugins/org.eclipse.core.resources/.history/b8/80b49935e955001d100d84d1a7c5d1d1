@@ -1,0 +1,67 @@
+package com.javateam.TimeLabel.dao.impl;
+
+import java.util.List;
+import java.util.Optional;
+
+import javax.sql.DataSource;
+
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.springframework.stereotype.Repository;
+
+import com.javateam.TimeLabel.dao.ProductDAO;
+import com.javateam.TimeLabel.domain.Product;
+import com.javateam.TimeLabel.mapper.ProductMapper;
+import com.javateam.TimeLabel.mapper.ProductSearchCond;
+import com.javateam.TimeLabel.mapper.ProductUpdateDto;
+import com.mysql.cj.log.LogFactory;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Repository
+@RequiredArgsConstructor
+public class MybatisProductDAOImpl implements ProductDAO{
+	// 의존성 주입
+	private ProductMapper productMapper;
+	private SqlSession ss;
+	
+	private final Log log = org.apache.ibatis.logging.LogFactory.getLog(getClass());
+	
+	@Override
+	public Product save(Product product) {
+		ss.getMapper(ProductMapper.class).save(product);
+		log
+		return product;
+	}
+
+	@Override
+	public void update(Long index, ProductUpdateDto updateParam) {
+		ss.getMapper(ProductMapper.class).update(index, updateParam);
+		log.info("ProductDAO update");
+		log.info("ItemupdateParam={}", updateParam);
+	}
+
+	@Override
+	public Optional<Product> findByIndex(Long index) {
+		log.info("findItemIndex={}", index);
+		return ss.getMapper(ProductMapper.class).finByIndex(index);
+	}
+
+	@Override
+	public List<Product> findAll(ProductSearchCond cond) {
+		log.info("searchItem={}", cond);
+		return ss.getMapper(ProductMapper.class).findAll(cond);
+	}
+
+	@Override
+	public void deleteProduct(Long index) {
+		log.info("deleteItemInex={}", index);
+		ss.getMapper(ProductMapper.class).deleteProduct(index);
+	}
+	
+
+
+}

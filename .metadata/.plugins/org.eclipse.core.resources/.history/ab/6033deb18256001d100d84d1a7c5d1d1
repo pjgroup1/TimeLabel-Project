@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javateam.TimeLabel.mapper.ProductMapper">
+	<!-- namespace 속성은 연동시키고자 하는 Mapper 인터페이스명을 경로와 함께 명시 -->
+
+
+	<resultMap type="Product" id="ProductResult">
+		<result property="productId" column="product_id" />
+		<result property="mainCategory" column="main_category" />
+		<result property="subCategory" column="sub_category" />
+		<result property="productName" column="product_name" />
+		<result property="productPrice" column="product_price" />
+		<result property="productTitleImg" column="product_title_img" />
+		<result property="productExplainImg"
+			column="product_explain_img" />
+		<result property="productStock" column="product_stock" />
+		<result property="productContent" column="product_content" />
+		<result property="productDate" column="product_date" />
+		<result property="discountRate" column="discount_rate" />
+		<result property="orderCount" column="order_count" />
+	</resultMap>
+
+
+	<!-- 상품 등록 -->
+	<insert id="save" useGeneratedKeys="true" keyProperty="index">
+		insert into product (PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_INFO,
+		PRODUCT_REP_IMAGE, PRODUCT_DETAIL_IMAGE1, PRODUCT_DETAIL_IMAGE2,
+		PRODUCT_DETAIL_IMAGE3, PRODUCT_QUANTITY) values
+		(#{itemName},#{price},#{info},#{mainImage},#{image1},#{image2},#{image3},#{quantity})
+	</insert>
+
+	<!-- 상품 업데이트 -->
+	<!-- <update> update set itemName </update> -->
+
+	<!-- 상품 검색 -->
+	<!-- <select> </select> -->
+
+	<!-- 상품 전체 조회 -->
+	<!-- <select> </select> -->
+	<!-- 상품 제거 -->
+	<!-- <delete> </delete> -->
+</mapper>

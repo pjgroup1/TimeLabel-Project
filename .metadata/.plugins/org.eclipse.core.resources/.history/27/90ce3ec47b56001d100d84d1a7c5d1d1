@@ -1,0 +1,9 @@
+package beanTest;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class ApplicationContextInfoTest {
+
+	
+	AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(My)
+}

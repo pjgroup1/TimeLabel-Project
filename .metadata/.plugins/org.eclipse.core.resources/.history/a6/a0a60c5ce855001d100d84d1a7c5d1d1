@@ -1,0 +1,20 @@
+package com.javateam.TimeLabel.domain;
+
+import lombok.Data;
+
+@Data
+public class ProductImage {
+
+	private String imageIndex; // 상품이미지 번호
+
+	private String index; // 상품 번호
+	
+	public ProductImage() {
+		
+	}
+	
+	public ProductImage(String imageIndex, String index) {
+		this.imageIndex = imageIndex;
+		this.index = index;
+	}
+}

@@ -1,0 +1,28 @@
+package com.java.team.dao.product;
+
+import com.java.team.dto.Product;
+import java.util.List;
+import java.util.Optional;
+
+import org.apache.ibatis.annotations.Param;
+
+public interface ProductDAO {
+
+		
+		// 저장
+		public Product save(Product product);
+		
+		// 업데이트
+		// void update(@Param("index") Long index, @Param("updateParam") ProductUpdateDto updateParam);
+		
+		// 한개 조회
+		public Optional<Product> findByIndex(Long index);
+		
+		// 목록 리스트
+		// public List<Product> findAll(ProductSearchCond cond);
+		
+		// 상품 리뷰 
+		// List<Review> ProductReviewList();
+		// 삭제
+		void deleteProduct(Long index);
+}

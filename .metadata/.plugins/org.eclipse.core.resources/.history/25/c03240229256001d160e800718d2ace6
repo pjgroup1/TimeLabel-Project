@@ -1,0 +1,17 @@
+package com.java.team.dto;
+
+@Data
+public class ProductSearchCond {
+
+	private String itemName;
+	private Integer maxPrice;
+	public ProductSearchCond() {
+
+	}
+	public ProductSearchCond(String itemName, Integer maxPrice) {
+		super();
+		this.itemName = itemName;
+		this.maxPrice = maxPrice;
+	}
+	
+}

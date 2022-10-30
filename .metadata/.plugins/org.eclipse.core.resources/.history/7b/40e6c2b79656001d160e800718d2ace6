@@ -1,0 +1,40 @@
+package com.java.team.dao.impl;
+
+import java.util.Optional;
+
+import javax.annotation.Resource;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.java.team.dao.product.ProductDAO;
+import com.java.team.dto.Product;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public class ProductDAOImpl implements ProductDAO{
+	
+	@Autowired
+	@Resource(name = "sqlSessionTemplate")
+	private SqlSession sqlSession;
+	
+	@Override
+	public Product save(Product product) {
+		sqlSession.insert("ProductMapper", "save")
+		return 
+	}
+
+	@Override
+	public Optional<Product> findByIndex(Long index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteProduct(Long index) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

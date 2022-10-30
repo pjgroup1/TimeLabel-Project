@@ -1,0 +1,42 @@
+package com.javateam.TimeLabel.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.javateam.TimeLabel.dao.ProductDAO;
+import com.javateam.TimeLabel.domain.Product;
+import com.javateam.TimeLabel.mapper.ProductSearchCond;
+import com.javateam.TimeLabel.mapper.ProductUpdateDto;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class ProductServiceV1 implements ProductService{
+	
+	private final ProductDAO productDAO;
+	
+	@Override
+	public Product save(Product product) {
+		return productDAO.save(product);
+	}
+
+	@Override
+	public void update(Long index, ProductUpdateDto updateParam) {
+		productDAO.update(index, updateParam);
+		
+	}
+
+	@Override
+	public Optional<Product> findByIndex(Long index) {
+		return productDAO.findByIndex(index);
+	}
+
+	@Override
+	public List<Product> findItems(ProductSearchCond cond) {
+		return productDAO.findAll(cond);
+	}
+
+}

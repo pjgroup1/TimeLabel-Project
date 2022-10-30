@@ -1,0 +1,21 @@
+package com.javateam.TimeLabel.config;
+
+import javax.sql.DataSource;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.javateam.TimeLabel.dao.MybatisProductDAOImpl;
+import com.javateam.TimeLabel.dao.ProductDAO;
+import com.javateam.TimeLabel.mapper.ProductMapper;
+import com.javateam.TimeLabel.service.ProductService;
+import com.javateam.TimeLabel.service.ProductServiceV1;
+
+import lombok.RequiredArgsConstructor;
+
+@Configuration
+@RequiredArgsConstructor
+public class MybatisConfig {
+	
+
+}

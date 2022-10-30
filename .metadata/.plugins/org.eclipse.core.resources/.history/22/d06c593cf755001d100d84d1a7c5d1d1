@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ProductMapper">
+
+
+PRODUCT_INDEX INT(10) PRIMARY KEY NOT NULL COMMENT '상품번호',
+PRODUCT_CATEGORY_INDEX INT(20) COMMENT '카테고리 번호',
+PRODUCT_NAME VARCHAR(50) NOT NULL COMMENT '상품명',
+PRODUCT_PRICE VARCHAR(20) NOT NULL COMMENT '상품가격',
+PRODUCT_INFO VARCHAR(2555) COMMENT '상세정보',
+PRODUCT_DATE DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT '상품 등록일',
+PRODUCT_REP_IMAGE VARCHAR(100) COMMENT '상품 대표이미지',
+PRODUCT_DETAIL_IMAGE1 VARCHAR(100) COMMENT '일반 이미지1',
+PRODUCT_DETAIL_IMAGE2 VARCHAR(100) COMMENT '일반 이미지2',
+PRODUCT_DETAIL_IMAGE3 VARCHAR(100) COMMENT '일반 이미지3',
+PRODUCT_QUANTITY
+
+
+<!-- 상품 등록  -->
+<insert id="save" useGeneratedKeys="true" keyProperty="index">
+insert into product (PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_INFO, 
+PRODUCT_REP_IMAGE, PRODUCT_DETAIL_IMAGE1, PRODUCT_DETAIL_IMAGE2, PRODUCT_DETAIL_IMAGE3, PRODUCT_QUANTITY) values
+(#{itemName},#{price},#{info},#{mainImage},#{image1},#{image2},#{image3},#{quantity})
+</insert>
+
+<!-- 상품 업데이트 -->
+<update>
+
+</update>
+
+
+<!-- 상품 검색 -->
+<select>
+
+</select>
+
+
+<!-- 상품 전체 조회 -->
+<select>
+
+
+</select>
+
+<!-- 상품 제거 -->
+<delete>
+
+</delete>
+
+
+</mapper>

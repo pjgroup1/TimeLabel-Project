@@ -1,0 +1,80 @@
+package com.javateam.TimeLabel.domain;
+
+import java.sql.Date;
+
+public class Product {
+	
+	private Long index; // 상품번호
+	private String itemName; // 상품명
+	private String categoryIndex;
+	private String price; // 상품가격
+	private Date date; // 상품등록일
+	private String info; // 상품 정보
+	private int quantity; // 상품 수량
+	private String mainImage; // 상품 대표 이미지
+	
+	public String getItemName() {
+		return itemName;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public Long getIndex() {
+		return index;
+	}
+	public void setIndex(Long index) {
+		this.index = index;
+	}
+	public String getCategoryIndex() {
+		return categoryIndex;
+	}
+	public void setCategoryIndex(String categoryIndex) {
+		this.categoryIndex = categoryIndex;
+	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public String getInfo() {
+		return info;
+	}
+	public void setInfo(String info) {
+		this.info = info;
+	}
+	public String getMainImage() {
+		return mainImage;
+	}
+	public void setMainImage(String mainImage) {
+		this.mainImage = mainImage;
+	}
+	
+	public Product(String name, String price, int i, String string3, String string4, int j, String string5) {
+		
+	}
+	public Product(String categoryIndex, String name, String price, Date date, String info, String mainImage, String image1,
+		int quantity,String image2) {
+		this.categoryIndex = categoryIndex;
+		this.itemName = itemName;
+		this.price = price;
+		this.date = date;
+		this.info = info;
+		this.quantity = quantity;
+		this.mainImage = mainImage;
+	}
+	
+}

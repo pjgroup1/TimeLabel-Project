@@ -1,0 +1,107 @@
+package com.javateam.TimeLabel.domain;
+
+import java.sql.Date;
+
+public class Product {
+	
+	private Long index; // 상품번호
+	private String itemName; // 상품명
+	private String categoryIndex;
+	private int price; // 상품가격
+	private Date date; // 상품등록일
+	private String info; // 상품 정보
+	private int quantity; // 상품 수량
+	private String mainImage; // 상품 대표 이미지
+	private String image1; // 상품 대표 이미지
+	private String image2; // 상품 대표 이미지
+	private String image3; // 상품 대표 이미지
+	
+	public String getItemName() {
+		return itemName;
+	}
+	public String getImage1() {
+		return image1;
+	}
+	public void setImage1(String image1) {
+		this.image1 = image1;
+	}
+	public String getImage2() {
+		return image2;
+	}
+	public void setImage2(String image2) {
+		this.image2 = image2;
+	}
+	public String getImage3() {
+		return image3;
+	}
+	public void setImage3(String image3) {
+		this.image3 = image3;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public Long getIndex() {
+		return index;
+	}
+	public void setIndex(Long index) {
+		this.index = index;
+	}
+	public String getCategoryIndex() {
+		return categoryIndex;
+	}
+	public void setCategoryIndex(String categoryIndex) {
+		this.categoryIndex = categoryIndex;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public String getInfo() {
+		return info;
+	}
+	public void setInfo(String info) {
+		this.info = info;
+	}
+	public String getMainImage() {
+		return mainImage;
+	}
+	public void setMainImage(String mainImage) {
+		this.mainImage = mainImage;
+	}
+	
+	public Product() {
+		
+	}
+	public Product(Long index, String itemName, String categoryIndex, int price, Date date, String info, int quantity,
+			String mainImage, String image1, String image2, String image3) {
+		super();
+		this.index = index;
+		this.itemName = itemName;
+		this.categoryIndex = categoryIndex;
+		this.price = price;
+		this.date = date;
+		this.info = info;
+		this.quantity = quantity;
+		this.mainImage = mainImage;
+		this.image1 = image1;
+		this.image2 = image2;
+		this.image3 = image3;
+	}
+	
+	
+}

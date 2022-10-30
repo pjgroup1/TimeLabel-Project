@@ -1,0 +1,11 @@
+package JDBCTest;
+
+public class JDBCTest {
+	
+	static {
+		try {
+			Class.forName(org.mariadb.jdbc.Driver)
+			Class.forName(org.mariadb.jdbc.Driver);
+		}
+	}
+}

@@ -1,0 +1,44 @@
+package com.java.team.dao.impl;
+
+import java.util.Optional;
+
+import javax.annotation.Resource;
+
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.java.team.dao.product.ProductDAO;
+import com.java.team.dto.Product;
+import com.java.team.mapper.ProductMapper;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public class ProductDAOImpl implements ProductDAO{
+	
+	@Autowired
+	private ProductMapper productMapper;
+	private Logger log = LoggerFactory.getLogger(getClass());
+	@Override
+	public Product save(Product product) {
+		
+		log.info("itemMapper class={}", itemMapper.getClass());
+		productMapper.save(product);
+		retrurn product;
+	}
+
+	@Override
+	public Optional<Product> findByIndex(Long index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteProduct(Long index) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

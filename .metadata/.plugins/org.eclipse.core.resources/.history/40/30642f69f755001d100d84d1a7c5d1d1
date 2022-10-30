@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0/EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    
+     <settings>
+        <setting name="jdbcTypeForNull" value="NULL" />
+    </settings>
+    
+    
+    <!-- 설정 -->
+    <settings>
+    	<!-- DB응답을 얼마나 오래 기다릴지 판단하는 타임아웃 (초단위) -->
+    	<setting name="defaultStatementTimeout" value="30"/>
+    	<!-- 스네이크/카멜케이스 자동변환 매핑하는 옵션 -->
+    	<!-- <setting name="mapUnderscoreToCamelCase" value="true"/> -->
+    </settings>
+    
+    
+     <typeAliases>
+        <typeAlias type="com.javateam.TimeLabel.domain.Product" alias="Product" />
+        <typeAlias type="com.javateam.TimeLabel.domain.User" alias="User" />
+        
+        
+    </typeAliases>     
+    <!-- <mappers>
+    	<mapper resource="com.aplus.mapper.MemberMapper.xml"/>
+    </mappers> -->
+    
+</configuration>

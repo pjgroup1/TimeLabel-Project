@@ -1,0 +1,108 @@
+package com.java.team.dto;
+
+import lombok.Data;
+
+@Data
+public class Product {
+
+	private Long index; // 상품번호
+	private String categoryIndex; // 카테고리 번호
+	private String itemName; // 상품명
+	private int price; // 상품가격
+	private String info; // 상품 정보
+	private String date; // 상품 등록일
+	private String mainImage; // 상품 대표 이미지
+	private String image1; // 상품 대표 이미지
+	private String image2; // 상품 대표 이미지
+	private String image3; // 상품 대표 이미지
+/*
+	public String getCategoryIndex() {
+		return categoryIndex;
+	}
+
+	public void setCategoryIndex(String categoryIndex) {
+		this.categoryIndex = categoryIndex;
+	}
+
+	public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getMainImage() {
+		return mainImage;
+	}
+
+	public void setMainImage(String mainImage) {
+		this.mainImage = mainImage;
+	}
+
+	public String getImage1() {
+		return image1;
+	}
+
+	public void setImage1(String image1) {
+		this.image1 = image1;
+	}
+
+	public String getImage2() {
+		return image2;
+	}
+
+	public void setImage2(String image2) {
+		this.image2 = image2;
+	}
+
+	public String getImage3() {
+		return image3;
+	}
+
+	public void setImage3(String image3) {
+		this.image3 = image3;
+	}
+
+	public Product() {
+
+	}
+
+	public Product(String itemName, String categoryIndex, int price, String info, int quantity, String mainImage,
+			String image1, String image2, String image3) {
+
+		this.itemName = itemName;
+		this.categoryIndex = categoryIndex;
+		this.price = price;
+		this.info = info;
+		this.mainImage = mainImage;
+		this.image1 = image1;
+		this.image2 = image2;
+		this.image3 = image3;
+	}*/
+
+}

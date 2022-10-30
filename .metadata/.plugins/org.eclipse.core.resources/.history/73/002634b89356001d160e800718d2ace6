@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.team.mapper.ProductMapper">
+	<!-- namespace 속성은 연동시키고자 하는 Mapper 인터페이스명을 경로와 함께 명시 -->
+
+	<resultMap type="Product" id="ProductResult">
+		<result property="itemName" column="PRODUCT_NAME" />
+		<result property="categoryIndex" column="PRODUCT_CATEGORY_INDEX" />
+		<result property="price" column="PRODUCT_PRICE" />
+		<result property="info" column="PRODUCT_INFO" />
+		<result property="mainImage" column="PRODUCT_MAIN_IMAGE" />
+		<result property="image1" column="PRODUCT_DETAIL_IMAGE1" />
+		<result property="image2" column="PRODUCT_DETAIL_IMAGE2" />
+		<result property="image3" column="PRODUCT_DETAIL_IMAGE3" />
+	</resultMap>
+
+
+	<!-- 상품 등록 -->
+	<insert id="save" useGeneratedKeys="true" keyProperty="index">
+		insert into PRODUCT
+		 (PRODUCT_NAME,PRODUCT_CATEGORY_INDEX, PRODUCT_PRICE, PRODUCT_INFO,PRODUCT_MAIN_IMAGE, PRODUCT_DETAIL_IMAGE1, PRODUCT_DETAIL_IMAGE2,PRODUCT_DETAIL_IMAGE3) 
+		 values(#{itemName},#{categoryIndex},#{price},#{info},#{mainImage},#{image1},#{image2},#{image3},)
+	</insert>
+
+	<!-- 상품 업데이트 -->
+	<update id="update">
+	update Product
+	set 
+	PRODUCT_NAME = #{updateParam.itemName},
+	PRODUCT_PRICE = #{updateParam.price},
+	PRODUCT_INFO = #{updateParam.info},
+	PRODUCT_MAIN_IMAGE = #{updateParam.mainImage},
+	PRODUCT_DETAIL_IMAGE1 = #{updateParam.image1},
+	PRODUCT_DETAIL_IMAGE2 = #{updateParam.image2},
+	PRODUCT_DETAIL_IMAGE3 = #{updateParam.image3}
+	where 
+	PRODUCT_INDEX = #{index}
+	</update>
+
+	<!-- 상품 검색 -->
+	 <select id="findByIndex" resultType="com.java.team.dto.Product"> 
+	 select 
+	 PRODUCT_INDEX,
+	 PRODUCT_NAME,
+	 PRODUCT_CATEGORY_INDEX,
+	 PRODUCT_PRICE,PRODUCT_INFO,
+	 PRODUCT_MAIN_IMAGE,
+	 PRODUCT_DETAIL_IMAGE1,
+	 PRODUCT_DETAIL_IMAGE2,
+	 PRODUCT_DETAIL_IMAGE3
+	 from PRODUCT
+	 where PRODUCT_INDEX = #{index}
+	 </select>
+
+	<!-- 상품 전체 조회 -->
+	<!-- <select id=""> </select> -->
+	
+	<!-- 상품 제거 -->
+	<!-- <delete id=""> </delete> -->
+</mapper>

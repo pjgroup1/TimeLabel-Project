@@ -1,0 +1,5 @@
+package com.java.team.dto;
+
+public class ProductSearchCond {
+
+}

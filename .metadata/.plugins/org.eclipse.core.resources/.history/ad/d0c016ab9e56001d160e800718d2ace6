@@ -1,0 +1,26 @@
+package JDBCTest;
+
+import javax.sql.DataSource;
+
+import org.junit.Test;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public class DataSourceTest {
+
+	@Autowired
+	private DataSource dataSource;
+	private final Logger log = LoggerFactory.getLogger(getClass());
+	
+	@Test
+	public void testConnection() {
+		try {
+			
+		}catch(Exception e) {
+			
+		}
+	}
+}
