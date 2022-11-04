@@ -182,6 +182,10 @@ td {
 					<td><input type="text" size="50" name="Address" readOnly><input
 						type="button" value="주소 검색" onClick="getPostcodeAddress()"></td>
 				</tr>
+				<tr>
+					<td id="title">상세주소</td>
+					<td><input type="text" size="30" name="Address_detail"></td>
+				</tr>
 			</table>
 			<br> <input type="submit" value=" 가 입 "> <input
 				type="button" value=" 취 소 " onclick="goLoginForm()">

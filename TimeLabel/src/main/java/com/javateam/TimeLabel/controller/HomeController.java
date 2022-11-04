@@ -74,6 +74,18 @@ public class HomeController {
 		return "UserMain";
 	}
 
+	@GetMapping("/AdminMain")
+	public String AdminMain() {
+		logger.info("관리자 메인화면");
+		return "AdminMain";
+	}
+
+	@PostMapping("/UploadTest")
+	public String UploadTest() {
+		logger.info("관리자 메인화면");
+		return "UploadTest";
+	}
+
 	@GetMapping("/UserTop")
 	public String UserTop() {
 		logger.info("상단바");

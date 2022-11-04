@@ -16,6 +16,7 @@ String Email = request.getParameter("Email");
 String Contact = request.getParameter("Contact") + "-" + request.getParameter("Contact2") + "-"
 		+ request.getParameter("Contact3");
 String Address = request.getParameter("Address");
+String Address_Detail=request.getParameter("Address_Detail");
 
 try {
 	Class.forName("org.mariadb.jdbc.Driver"); // HeidiSQL jdbc 연결
@@ -32,7 +33,7 @@ try {
 	String password = "sang1234";
 
 	Connection con = DriverManager.getConnection(DB_URL, userName, password);
-	String sql = "INSERT INTO USER(USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_MOBILE, USER_ADDRESS,USER_DATE) VALUES (?,?,?,?,?,?,?)"; // sql문 작성(입력받은 값들을 보내기 위한 작업)
+	String sql = "INSERT INTO USER(USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_MOBILE, USER_ADDRESS,USER_DATE,USER_ADDRESS_DETAI) VALUES (?,?,?,?,?,?,?,?)"; // sql문 작성(입력받은 값들을 보내기 위한 작업)
 
 	PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -44,6 +45,7 @@ try {
 	pstmt.setString(5, Contact);
 	pstmt.setString(6, Address);
 	pstmt.setString(7, LocalDateTime.now().toString());
+	pstmt.setString(8, Address_Detail);
 
 	pstmt.executeUpdate();
 
