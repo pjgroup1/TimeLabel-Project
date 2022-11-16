@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javateam.TimeLabel.mapper.OrderMapper">
+
+
+    <resultMap type="com.javateam.TimeLabel.model.OrderVO" id="OrderVOResultMap">
+        <result property="orderIndex" column="ORDER_INDEX"/>
+        <result property="userIndex" column="USER_INDEX"/>
+        <result property="orderStateIndex" column="ORDER_STATE_INDEX"/>
+        <result property="orderDate" column="ORDER_DATE"/>
+        <result property="orderMessage" column="ORDER_MESSAGE"/>
+        <result property="orderDetailIndex" column="ORDER_DETAIL_INDEX"/>
+        <result property="productOptionIndex" column="PRODUCT_OPTION_INDEX"/>
+        <result property="productCount" column="PRODUCT_COUNT"/>
+        <result property="orderStateInfo" column="ORDER_STATE_INFO"/>
+        <result property="productName" column="PRODUCT_NAME"/>
+    </resultMap>
+
+
+    <!-- 주문  keyProperty="orderIndex" -->
+    <insert id="order" useGeneratedKeys="true">
+        insert into ORDER_ (USER_INDEX, ORDER_STATE_INDEX, ORDER_MESSAGE)
+        values (#{userIndex}, #{orderStateIndex}, #{orderMessage});
+        insert into ORDER_DETAIL (ORDER_INDEX, PRODUCT_OPTION_INDEX, PRODUCT_COUNT)
+        select (select max(ORDER_INDEX) FROM ORDER_), PRODUCT_OPTION_INDEX, PRODUCT_COUNT
+               from cart;
+        </insert>
+
+    <!-- 주문 리스트 조회 -->
+    <select id="orderList" resultMap="OrderVOResultMap">
+        select * from
+        VIEW_ORDER
+        <!-- 유저용 -->
+        <where>
+            <if test="userIndex != 1" >
+                 USER_INDEX = #{userIndex}
+            </if>
+        </where>
+    </select>
+
+
+
+    <!-- 주문 상세 조회 -->
+    <select id="orderDetailList" resultMap="OrderVOResultMap">
+        select *
+        from VIEW_ORDER_DETAIL
+        <!-- 유저용 -->
+        <where>
+            <if test="userIndex != 1" >
+                USER_INDEX = #{userIndex}
+            </if>
+        </where>
+    </select>
+
+    <!-- 주문 삭제 -->
+    <delete id="orderDelete">
+        delete
+        from ORDER_
+        where ORDER_INDEX = #{orderIndex};
+        delete
+        from ORDER_DETAIL
+        where ORDER_INDEX = #{orderIndex};
+    </delete>
+
+
+</mapper>
