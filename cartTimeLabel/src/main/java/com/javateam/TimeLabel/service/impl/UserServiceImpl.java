@@ -2,20 +2,19 @@ package com.javateam.TimeLabel.service.impl;
 
 import com.javateam.TimeLabel.model.UserVO;
 import com.javateam.TimeLabel.mapper.UserMapper;
-import com.javateam.TimeLabel.service.DTO.UserSearchDTO;
-import com.javateam.TimeLabel.service.DTO.UserUpdateServiceDTO;
 import com.javateam.TimeLabel.service.UserService;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("userService")
 public class UserServiceImpl implements UserService {
 
     @Autowired
+    @Qualifier("userDAO")
     private UserMapper userMapper;
 
     // @Autowired
@@ -33,14 +32,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserVO> findAllUser(UserSearchDTO userSearch) {
-       List<UserVO> allUser = userMapper.findAllUser(userSearch);
+    public List<UserVO> findAllUser(UserVO user) {
+       List<UserVO> allUser = userMapper.findAllUser(user);
         return allUser;
     }
 
     @Override // parameter 2개 이상부터는 @Param을 지정해주어야함
-    public void updateUser(UserUpdateServiceDTO updateParam) {
-        userMapper.updateUser(updateParam);
+    public void updateUser(UserVO user) {
+        userMapper.updateUser(user);
     }
 
     // 아이디 삭제

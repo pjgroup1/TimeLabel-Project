@@ -1,7 +1,7 @@
+/*
 package com.javateam.TimeLabel.service;
 
 import com.javateam.TimeLabel.model.ProductVO;
-import com.javateam.TimeLabel.service.DTO.ProductUpdateServiceDTO;
 import org.apache.ibatis.annotations.Param;
 
 import java.sql.SQLException;
@@ -20,3 +20,4 @@ public interface ProductService {
     // 상품 삭제
     void productDelete(String productIndex) throws SQLException;
 }
+*/

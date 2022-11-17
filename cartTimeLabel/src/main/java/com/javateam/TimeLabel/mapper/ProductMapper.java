@@ -1,7 +1,7 @@
+/*
 package com.javateam.TimeLabel.mapper;
 
 import com.javateam.TimeLabel.model.ProductVO;
-import com.javateam.TimeLabel.service.DTO.ProductUpdateServiceDTO;
 
 import java.util.List;
 
@@ -21,3 +21,4 @@ public interface ProductMapper{
 	void productDelete(String product_index);
 	
 }
+*/

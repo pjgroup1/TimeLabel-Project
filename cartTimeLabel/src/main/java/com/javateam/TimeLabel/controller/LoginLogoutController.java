@@ -3,7 +3,6 @@
 import com.javateam.TimeLabel.model.UserVO;
 import com.javateam.TimeLabel.model.session.SessionConst;
 import com.javateam.TimeLabel.model.session.SessionManager;
-import com.javateam.TimeLabel.service.DTO.UserLoginServiceDTO;
 import com.javateam.TimeLabel.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -11,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -26,20 +26,21 @@ import java.sql.SQLException;
 
 
 @Controller
-@RequiredArgsConstructor
 @RequestMapping("/user")
 public class LoginLogoutController {
 
 	private static final Logger log = LoggerFactory.getLogger(LoginLogoutController.class);
 
 	@Autowired
+    @Qualifier("userService")
     private UserService userService;
+
 	@Autowired
     private SessionManager sessionManager;
 
     // @GetMapping("/login")
     @RequestMapping(value="/login", method = RequestMethod.GET)
-    public String login(@ModelAttribute("loginService") UserLoginServiceDTO loginService,
+    public String login(@ModelAttribute("user") UserVO user,
                         HttpServletRequest request) {
         log.info("============== 로그인 페이지로 이동 ================>");
         // 세션이 아직 남은 상태에서 login창으로 들어갈려고 하면 main사이트로 갈수있도록함
@@ -51,12 +52,10 @@ public class LoginLogoutController {
                 return "user/main";
             }
         }
-        return "user/login";
+        return "login";
 
     }
 
-    // 로그인
-    // @PostMapping("/login")
     @RequestMapping(value="/login", method = RequestMethod.POST)
     public String loginAction(@Validated @ModelAttribute("user")
                                           UserVO user,
@@ -68,7 +67,7 @@ public class LoginLogoutController {
 
         if(bindingResult.hasErrors()) {
             // 에러 발생시 다시 로그인 화면으로 이동
-            return "user/login";
+            return "login";
 
         }
 
@@ -77,7 +76,7 @@ public class LoginLogoutController {
         if(loginUser == null) {
             // 글로벌 오류
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 다릅니다.");
-            return "user/login";
+            return "login";
 
         }
 
@@ -114,15 +113,9 @@ public class LoginLogoutController {
 
         }
 
-        return "redirect:/user/login";
+        return "redirect:/login";
 
     }
 
-   /* private void expireCookie(HttpServletResponse response, String cookieName){
-        // Cookie(String name, String value)
-        Cookie cookie = new Cookie(cookieName, null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
 
-    }*/
 }

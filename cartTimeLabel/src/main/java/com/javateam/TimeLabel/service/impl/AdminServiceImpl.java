@@ -2,27 +2,22 @@ package com.javateam.TimeLabel.service.impl;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import com.javateam.TimeLabel.model.ProductCategoryVO;
 import com.javateam.TimeLabel.model.ProductVO;
 import com.javateam.TimeLabel.service.AdminService;
-import com.javateam.TimeLabel.service.dao.AdminDAO;
+import com.javateam.TimeLabel.mapper.AdminMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-//import com.kubg.domain.CategoryVO;
-//import com.kubg.domain.GoodsVO;
-//import com.kubg.domain.GoodsViewVO;
-//import com.kubg.domain.OrderListVO;
-//import com.kubg.domain.OrderVO;
-//import com.kubg.domain.ReplyListVO;
-import com.javateam.TimeLabel.service.dao.AdminDAO;
- 
-@Service
+
+
+@Service("adminService")
 public class AdminServiceImpl implements AdminService {
 
-	@Inject
-	private AdminDAO dao;
+	@Autowired
+	@Qualifier(("adminDAO"))
+	private AdminMapper dao;
 
 	// 카테고리
 	@Override

@@ -2,7 +2,6 @@ package com.javateam.TimeLabel.controller;
 
 
 import com.javateam.TimeLabel.model.ProductVO;
-import com.javateam.TimeLabel.service.ProductService;
 import com.javateam.TimeLabel.validation.ProductValidation;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +23,7 @@ import java.sql.SQLException;
 public class ProductController {
 
     @Autowired
-    private ProductService productService;
+    // private ProductService productService;
 
     private final ProductValidation productValidation;
 
@@ -50,7 +49,7 @@ public class ProductController {
     }
 
     // 상품 등록
-    @PostMapping("/add")
+    /*@PostMapping("/add")
     public String addItem(@Validated @ModelAttribute ProductVO product,
                           BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         log.info("상품 등록 페이지 로 이동");
@@ -73,7 +72,7 @@ public class ProductController {
         log.info("상품 등록 완료");
         return "redirect:/product/{productIndex}";
     }
-
+*/
     // 상품 조회
     @GetMapping("/productList")
     public String productList() {

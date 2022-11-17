@@ -4,15 +4,17 @@ import com.javateam.TimeLabel.mapper.OrderMapper;
 import com.javateam.TimeLabel.model.OrderVO;
 import com.javateam.TimeLabel.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
 
-@Service
+@Service("orderService")
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
+    @Qualifier("orderDAO")
     private OrderMapper orderMapper;
 
     private static final String nameSpace = "com.javateam.TimeLabel.domain.OrderVO";

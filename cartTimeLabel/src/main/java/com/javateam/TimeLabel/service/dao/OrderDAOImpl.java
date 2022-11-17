@@ -4,9 +4,11 @@ import com.javateam.TimeLabel.mapper.OrderMapper;
 import com.javateam.TimeLabel.model.OrderVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository("orderDAO")
 public class OrderDAOImpl implements OrderMapper {
     @Autowired
     private SqlSession session;

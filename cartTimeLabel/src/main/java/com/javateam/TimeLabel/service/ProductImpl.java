@@ -1,9 +1,8 @@
+/*
 package com.javateam.TimeLabel.service;
 
 import com.javateam.TimeLabel.model.ProductVO;
 import com.javateam.TimeLabel.mapper.ProductMapper;
-import com.javateam.TimeLabel.service.DTO.ProductUpdateServiceDTO;
-import com.javateam.TimeLabel.service.ProductService;
 
 import java.util.List;
 
@@ -41,3 +40,4 @@ public class ProductImpl implements ProductService {
         productMapper.productDelete(productIndex);
     }
 }
+*/

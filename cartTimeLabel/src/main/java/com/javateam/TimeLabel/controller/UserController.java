@@ -2,12 +2,10 @@ package com.javateam.TimeLabel.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,17 +21,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.javateam.TimeLabel.model.UserVO;
 import com.javateam.TimeLabel.service.UserService;
-import com.javateam.TimeLabel.service.DTO.UserLoginServiceDTO;
-import com.javateam.TimeLabel.service.DTO.UserSearchDTO;
-import com.javateam.TimeLabel.service.DTO.UserUpdateServiceDTO;
 
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Handles requests for the application home page.
  */
 
-@Slf4j
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -46,9 +39,8 @@ public class UserController {
 	 */
 	
 	@Autowired
+    @Qualifier("userService")
     private UserService userService;
-
-    private UserLoginServiceDTO loginService;
 
     // private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -100,8 +92,7 @@ public class UserController {
 
     // 회원 전체 리스트
     @GetMapping("/userList")
-    public String getUserList(@Validated @ModelAttribute("userSearch") UserSearchDTO userSearch,
-                              BindingResult bindingResult) {
+    public String getUserList(@Validated UserVO user, BindingResult bindingResult) {
         log.info("회원 목록 요청");
 
         if (bindingResult.hasErrors()) {
@@ -109,7 +100,7 @@ public class UserController {
             return "오류 발생시 이동할 페이지";
         }
 
-        List<UserVO> userList = userService.findAllUser(userSearch);
+        List<UserVO> userList = userService.findAllUser(user);
 
         return "user/userList";
     }
@@ -130,8 +121,7 @@ public class UserController {
 
     // 회원 정보 수정 요청
     @PostMapping("/modifyUser")
-    public String modifyUser(@Validated @ModelAttribute("user") UserUpdateServiceDTO user
-            , BindingResult bindingResult) {
+    public String modifyUser(@Validated UserVO user, BindingResult bindingResult) {
         log.info("회원 수정에 입력받은 데이터={}", user);
         if (bindingResult.hasErrors()) {
             log.info("값이 안들어왔거나 잘못된값이 들어옴");

@@ -1,24 +1,18 @@
 package com.javateam.TimeLabel.controller;
 
-import com.javateam.TimeLabel.mapper.CartMapper;
-import com.javateam.TimeLabel.mapper.ProductMapper;
-import com.javateam.TimeLabel.model.OrderVO;
-import com.javateam.TimeLabel.model.ProductVO;
 import com.javateam.TimeLabel.model.UserVO;
 import com.javateam.TimeLabel.model.session.SessionConst;
 import com.javateam.TimeLabel.service.AdminService;
 import com.javateam.TimeLabel.service.CartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Slf4j
 @Controller
@@ -26,9 +20,11 @@ import java.util.List;
 public class OrderController {
 
     @Autowired
+    @Qualifier("adminService")
     private AdminService service;
 
     @Autowired
+    @Qualifier("cartService")
     private CartService cartService;
 
 
@@ -39,7 +35,7 @@ public class OrderController {
         UserVO userSession = (UserVO) request.getSession().getAttribute(SessionConst.LOGIN_USER);
 
         if (userSession == null) {
-            return "user/login";
+            return "login";
         }
 
         // log.info("userIndex={}, session={}", userIndex, session);
