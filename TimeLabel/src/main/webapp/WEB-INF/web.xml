@@ -7,7 +7,8 @@
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		 <param-value>/WEB-INF/spring/root-context.xml</param-value>
+		<!-- <param-value>/WEB-INF/spring/root-context.xml</param-value> -->
+		<param-value>classpath:spring/*-context.xml</param-value>
 	</context-param>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -23,13 +24,11 @@
 			<param-name>contextConfigLocation</param-name>
 			
 			<!-- swagger metadata 추가 -->
-			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml,
-						 /WEB-INF/spring/appServlet/swagger-context.xml
-			</param-value>
+			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml
 			<!-- Spring Security config -->
-			<!-- /WEB-INF/spring/security-context.xml -->
+			/WEB-INF/spring/appServlet/security-context.xml
+			</param-value>
 		</init-param>
-		
 		<!-- Spring CORS 서비스(Cross-Origin Resource Sharing:다른 원격서버 서비스 자원 접근)를 구성시 아래의 옵션을 사용하면 유효함 -->
 		<init-param>
 	        <param-name>dispatchOptionsRequest</param-name>
@@ -41,8 +40,8 @@
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<!-- swagger URL 추가 -->
-		<url-pattern>/swagger-ui.html</url-pattern>
-    	<url-pattern>/webjars/**</url-pattern>
+		<!-- <url-pattern>/swagger-ui.html</url-pattern>
+    	<url-pattern>/webjars/**</url-pattern> -->
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	

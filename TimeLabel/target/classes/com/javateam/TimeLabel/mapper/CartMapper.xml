@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javateam.TimeLabel.mapper.CartMapper">
+
+
+    <resultMap type="com.javateam.TimeLabel.model.CartVO" id="CartVOResultMap">
+        <result property="cartIndex" column="CART_INDEX"/>
+        <result property="userIndex" column="USER_INDEX"/>
+        <result property="productOptionIndex" column="PRODUCT_OPTION_INDEX"/>
+        <result property="productCount" column="PRODUCT_COUNT"/>
+        <result property="productCategoryName" column="PRODUCT_CATEGORY_NAME"/>
+        <result property="productName" column="PRODUCT_NAME"/>
+        <result property="productOptionValue" column="PRODUCT_OPTION_VALUE"/>
+        <result property="productPrice" column="PRODUCT_PRICE"/>
+        <result property="discountedPrice" column="DISCOUNTED_PRICE"/>
+        <result property="productMainImage" column="PRODUCT_MAIN_IMAGE"/>
+        <result property="productThumbImage" column="PRODUCT_DETAIL_IMAGE1"/>
+    </resultMap>
+    <!--  카트 추가  -->
+    <insert id="addCart"> insert into CART(CART_INDEX, USER_INDEX, PRODUCT_INDEX, PRODUCT_OPTION_INDEX, PRODUCT_COUNT)
+                          values (#{cartIndex}, #{userIndex}, #{productIndex}, #{productOptionIndex},
+                                  #{productCount}) </insert>
+    <!--  카트 삭제  -->
+    <delete id="deleteCart"> delete
+                             from CART
+                             where CART_INDEX = #{cartIndex}
+                             and USER_INDEX = #{userIndex}
+                             </delete>
+    <!--  카트 수량 수정  -->
+    <update id="modifyCount">
+        update cart
+        set PRODUCT_COUNT=#{productCount}
+        where CART_INDEX = #{cartIndex}
+    </update>
+
+    <!--  카트 목록  -->
+    <select id="getCartList" resultMap="CartVOResultMap">
+        select *
+        from VIEW_CART
+        where USER_INDEX = #{userIndex}
+
+    </select>
+
+    <!-- 특정 카트 목록 -->
+    <select id="selectedCart" resultMap="CartVOResultMap" parameterType="java.util.List">
+        select * from CART
+        where USER_INDEX = #{userIndex}
+        <foreach collection="list" item="cartIndex" open="and(" close=")" separator="or">
+            CART_INDEX = #{cartIndex}
+        </foreach>
+    </select>
+
+    <!--  카트 확인  -->
+    <select id="checkCart" resultMap="CartVOResultMap"> select *
+                                                        from VIEW_CART
+                                                        where USER_INDEX = #{userIndex}
+                                                          and PRODUCT_NAME = #{productName} </select>
+</mapper>

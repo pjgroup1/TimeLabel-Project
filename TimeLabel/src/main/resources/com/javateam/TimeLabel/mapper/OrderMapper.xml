@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javateam.TimeLabel.mapper.OrderMapper">
+
+
+    <resultMap type="com.javateam.TimeLabel.model.OrderVO" id="OrderVOResultMap">
+        <result property="orderIndex" column="ORDER_INDEX"/>
+        <result property="userIndex" column="USER_INDEX"/>
+        <result property="orderStateIndex" column="ORDER_STATE_INDEX"/>
+        <result property="orderDate" column="ORDER_DATE"/>
+        <result property="totalPrice" column="TOTAL_PRICE"/>
+        <result property="orderMessage" column="ORDER_MESSAGE"/>
+        <result property="orderStateInfo" column="ORDER_STATE_INFO"/>
+    </resultMap>
+
+    <resultMap type="com.javateam.TimeLabel.model.OrderDetailVO" id="OrderDetailVOResultMap">
+        <result property="orderIndex" column="ORDER_INDEX"/>
+        <result property="productName" column="PRODUCT_NAME"/>
+        <result property="productIndex" column="PRODUCT_INDEX"/>
+        <result property="orderDetailIndex" column="ORDER_DETAIL_INDEX"/>
+        <result property="productThumbImage" column="PRODUCT_DETAIL_IMAGE1"/>
+        <result property="productOptionValue" column="PRODUCT_OPTION_VALUE"/>
+        <result property="productCount" column="PRODUCT_COUNT"/>
+        <result property="productPrice" column="DISCOUNTED_PRICE"/>
+    </resultMap>
+
+
+    <!-- 주문  keyProperty="orderIndex" -->
+    <insert id="order" useGeneratedKeys="true">
+        insert into ORDER_ (USER_INDEX, ORDER_MESSAGE)
+        values (#{userIndex}, #{orderMessage});
+    </insert>
+	
+    <!-- 오더 디테일에 값 추가-->
+    <insert id="orderDetail" parameterType="java.util.List" useGeneratedKeys="true">
+    	<selectKey resultType="int" keyProperty="orderIndex" order="BEFORE">
+    		SELECT MAX(ORDER_INDEX) FROM ORDER_
+    	</selectKey>
+        insert into ORDER_DETAIL
+        ( ORDER_INDEX, PRODUCT_INDEX, PRODUCT_OPTION_INDEX, PRODUCT_COUNT )
+        values
+        <foreach collection="list" item="item" separator=", ">
+            (#{orderIndex}, #{item.productIndex}, #{item.productOptionIndex}, #{item.productCount})
+        </foreach>
+    </insert>
+
+    <!-- 주문 리스트 조회 -->
+    <select id="orderList" resultMap="OrderVOResultMap">
+        select
+        ORDER_INDEX,
+        USER_INDEX,
+        ORDER_STATE_INDEX,
+        ORDER_STATE_INFO,
+        ORDER_DATE,
+        TOTAL_PRICE,
+        ORDER_MESSAGE
+        from
+        VIEW_ORDER
+        <!-- 유저용 -->
+        <where>
+            <if test="userIndex != 1">
+                and USER_INDEX = #{userIndex}
+            </if>
+        </where>
+    </select>
+
+
+    <!-- 주문 상세 조회 -->
+    <select id="orderDetailList" resultMap="OrderDetailVOResultMap">
+        select *
+        from VIEW_ORDER_DETAIL
+        <!-- 유저용 -->
+        <where>
+            <if test="userIndex != 1">
+                and ORDER_INDEX = #{orderIndex}
+            </if>
+        </where>
+    </select>
+
+    <!-- 주문 삭제 -->
+    <delete id="orderDelete">
+        delete
+        from ORDER_
+        where ORDER_INDEX = #{orderIndex};
+        delete
+        from ORDER_DETAIL
+        where ORDER_INDEX = #{orderIndex};
+    </delete>
+
+    <update id="orderStateChange">
+        update ORDER_
+        set
+        ORDER_STATE_INDEX = #{orderStateIndex}
+        where ORDER_INDEX = #{orderIndex}
+    </update>
+
+    <!-- 배송 상태만 가져오기 -->
+  <!--  <select id="orderState" resultMap="OrderVOResultMap">
+        select * from
+        ORDER_STATE
+    </select>-->
+    <select id="orderState" resultMap="OrderVOResultMap">
+        select * from
+        ORDER_STATE
+    </select>
+</mapper>

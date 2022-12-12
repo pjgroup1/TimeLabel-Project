@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.javateam.TimeLabel.mapper.MemberMapper">
+  
+  	<resultMap type="com.javateam.TimeLabel.model.MemberVO" id="MemberVOResultMap">
+  		<result property="ID" column="MEMBERID" />
+  		<result property="PW" column="MEMBERPW" />
+  		<result property="NAME" column="MEMBERNAME" />
+  	</resultMap> 
+  	
+  	<!-- 회원가입 -->
+  	<insert id="memberSave" useGeneratedKeys="true" parameterType="com.javateam.TimeLabel.model.MemberVO">
+		insert into MEMBER(MEMBERID, MEMBERPW, MEMBERNAME)
+		values(#{ID},#{PW},#{NAME})
+	</insert>
+	
+	<select id="suchMember" parameterType="String">
+		select * from member where id=#{ID}
+	</select>
+	
+	<select id="findAll" parameterType="com.javateam.TimeLabel.model.MemberVO" resultType="com.javateam.TimeLabel.model.MemberVO">
+		select * from member
+	</select>
+  </mapper>

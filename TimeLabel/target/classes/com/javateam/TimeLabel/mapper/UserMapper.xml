@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javateam.TimeLabel.mapper.UserMapper">
+
+	<resultMap type="com.javateam.TimeLabel.model.UserVO" id="UserVOResultMap">
+		<result property="userIndex" column="USER_INDEX" />
+		<result property="userId" column="USER_ID" />
+		<result property="userPw" column="USER_PW" />
+		<result property="userName" column="USER_NAME" />
+		<result property="userEmail" column="USER_EMAIL" />
+		<result property="userMobile" column="USER_MOBILE" />
+		<result property="userZip" column="USER_ZIP" />
+		<result property="userAddress" column="USER_ADDRESS" />
+		<result property="userAddressDetail" column="USER_ADDRESS_DETAIL" />
+	</resultMap>
+	
+	<!-- include -->
+	<sql id="search" >
+		USER_INDEX,
+USER_ID, USER_PW,
+USER_NAME, USER_MOBILE,
+USER_EMAIL, USER_ZIP,
+USER_ADDRESS, USER_ADDRESS_DETAIL
+	</sql>
+
+	<!-- 업데이트 용 -->
+	<sql id="updateU">
+		USER_NAME = #{userName},
+		USER_PW = #{userPw},
+		USER_MOBILE = #{userMobile},
+		USER_EMAIL = #{userEmail},
+		USER_ZIP = #{userZip},
+		USER_ADDRESS = #{userAddress},
+		USER_ADDRESS_DETAIL = #{userAddressDetail}
+	</sql>
+
+	<insert id="userJoin" parameterType="com.javateam.TimeLabel.model.UserVO" useGeneratedKeys="true">
+
+		insert into USER (USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_MOBILE, USER_ZIP, USER_ADDRESS, USER_ADDRESS_DETAIL)
+		values(#{userId}, #{userPw}, #{userName}, #{userEmail}, #{userMobile}, #{userZip}, #{userAddress}, #{userAddressDetail})
+
+	</insert>
+
+	<!-- 비밀번호 찾기 -->
+	<select id="findPwUser" resultMap="UserVOResultMap">
+		select USER_ID, USER_EMAIL from USER
+		where USER_ID = #{userId}
+	</select>
+
+	<update id="changePw">
+		update USER
+		set USER_PW = #{userPw}
+		where USER_ID = #{userId}
+	</update>
+
+	<!-- 조회 -->
+	<select id="findUser" resultMap="UserVOResultMap" parameterType="int">
+		select
+		<include refid="search"></include>
+		from USER
+		where USER_INDEX=#{userIndex}
+	</select>
+
+	<!-- 전체 조회 -->
+	<select id="findAllUser" resultMap="UserVOResultMap">
+		select
+		*
+		from USER
+	</select>
+
+	<!-- 업데이트 -->
+	<update id="updateUser">
+		update USER
+		set
+		<include refid="updateU"></include>
+		where USER_INDEX=#{userIndex}
+	</update>
+
+	<!-- 삭제 -->
+	<delete id="deleteUser">
+		delete from USER where USER_INDEX=#{userIndex}
+	</delete>
+
+	<!-- 아이디 중복 검사 -->
+	<select id="userIdCheck" resultType="int">
+		select
+			count(*)
+		from USER
+		where USER_ID = #{userId}
+	</select>
+
+	<!-- 로그인 -->
+	<select id="userLogin" resultMap="UserVOResultMap">
+		select 
+		<include refid="search"></include>
+		from USER
+		where USER_ID = #{userId}
+	</select>
+
+
+</mapper>

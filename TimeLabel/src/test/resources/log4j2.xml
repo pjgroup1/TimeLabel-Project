@@ -44,10 +44,11 @@
 	
 	<Properties>
 	
-		<Property name="LOG_PATH" value="./log/test" />
+		<!-- <Property name="LOG_PATH" value="E:\lsh\log\spring\test" /> -->
+		<Property name="LOG_PATH" value="D:\bsh\log\TimeLabel\test" />
 		
 		<Property name="layoutPattern">
-			%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5p] [%C] [%t] [%l{36}] -- %m%n
+			%d{yyyy-MM-dd HH:mm:ss} [%-5p] [%C] [%t] -- %m%n
 		</Property>
 	</Properties>
 	
@@ -59,7 +60,7 @@
 		
 		<RollingFile name="FileAppender" 
 		 			 fileName="${LOG_PATH}/log4j2_test.log" 
-		 			 filePattern="${LOG_PATH}/log4j2_test_%d{yyyy-MM-dd}_%i.log">
+		 			 filePattern="${LOG_PATH}/%d{yyyy-MM-dd}/log4j2_test_%d{yyyy-MM-dd}_%i.log">
 		 			  
             <PatternLayout pattern="${layoutPattern}"/>
             
@@ -90,15 +91,8 @@
     jdbc.resultset : ResultSet을 포함한 모든 JDBC 호출 정보를 로그로 기록. 방대한 양의 로그 기록됨. 
     jdbc.resultsettable : SQL 결과 조회된 데이터 table을 로그 기록.
 	 -->
-	
+	 	
 	<Loggers>
-	
-		<Logger name="org.springframwork" 
-				level="INFO" 
-				additivity="false">
-			<AppenderRef ref="ConsoleAppender"/> 
-			<AppenderRef ref="FileAppender"/>
-		</Logger>
 	
 		<Logger name="com.javateam.TimeLabel" 
 				level="INFO" 
@@ -140,8 +134,8 @@
 		</Logger> 
 	
 		<!-- ////////////////////////////////////////// -->
-		
-		<Root level="DEBUG" additivity="false">
+				
+		<Root level="INFO" additivity="false">
 			<AppenderRef ref="ConsoleAppender" />
 			<AppenderRef ref="FileAppender"/>
 		</Root>

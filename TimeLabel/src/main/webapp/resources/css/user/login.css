@@ -1,0 +1,126 @@
+/* <style>
+.find-btn{
+	text-align: center;
+}
+.find-btn1{
+	display :inline-block;
+}
+
+	#login-box {
+		width:420px;
+		margin-left:auto;
+		margin-right:auto;
+		text-align:center;
+		white-space:nowrap;
+	}
+	
+	table{
+		border:3px solid #d49466;
+		margin-left:auto;
+		margin-right:auto;
+		text-align:center;
+	}
+	
+	td{
+		border:1px solid #d49466;
+		margin-left:auto;
+		margin-right:auto;
+		text-align:center;
+	}
+	
+	#title{
+		backgroud-color:#d49466
+		
+	}
+</style> */
+@charset "UTF-8";
+*{
+	margin: 0;
+	padding:0;
+}
+
+/* 화면 전체 영역  */
+.wrapper{
+	width: 100%;	
+}
+
+/* 컨텐츠 영역 */
+.wrap{
+	width : 800px;
+	margin: auto;
+}
+
+/* 제목 영역 */
+.title_wrap{
+	text-align: center;	
+	margin: 150px 0;	
+}
+.title_wrap>span{
+	font-size : 50px;
+	font-weight: 900;
+}
+
+
+/* 로그인 영역 */
+.input_box{
+	border: 1px solid black;
+	height:31px;
+	padding: 10px 14px;	
+	display: block;
+	width : 80%;
+	margin : auto;	
+}
+.id_input{
+	width:100%;
+	height:100%;
+	border:none;
+	font-size:28px;
+}
+
+/* 비밀번호 영역 */
+.id_wrap{
+	margin-top: 40px;
+}
+
+
+/* 로그인 버튼 영역 */
+.login_button_wrap{
+	margin-top: 40px;
+	text-align: center;
+}
+.login_button{
+	width: 84%;
+    height: 80px;
+    background-color: #6AAFE6;
+    font-size: 40px;
+    font-weight: 900;
+    color: white;
+    margin : auto;
+}
+
+/* 회원가입 버튼 영역 */
+.join_button_wrap{
+	margin-top: 40px;
+	text-align: center;
+}
+.join_button{
+	width: 84%;
+    height: 80px;
+    background-color: #6AAFE6;
+    font-size: 40px;
+    font-weight: 900;
+    color: white;
+    margin : auto;
+}
+
+/* 로그인 실패시 경고 메시지 */
+.login_warn{
+	margin-top: 30px;
+    text-align: center;
+    color : red;
+}
+
+/* float 속성 해제 */
+.clearfix{
+	clear: both;
+}
